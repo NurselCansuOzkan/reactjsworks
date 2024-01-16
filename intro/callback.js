@@ -60,18 +60,33 @@
 // })()
 //end
 
+//async-await kullanımı (fetch kullanarak)
+// (async ()=>{
+//     const users = await (
+//         await fetch("https://jsonplaceholder.typicode.com/users")
+//     ).json()
+
+//     const post1 = await (
+//         await fetch("https://jsonplaceholder.typicode.com/posts/1")
+//     ).json()
+
+//     const post2 = await (
+//         await fetch("https://jsonplaceholder.typicode.com/posts/2")
+//     ).json()
+
+//     console.log("User", users);
+//     console.log("Post 1", post1);
+//     console.log("Post 2", post2);
+// })();
+
+//async-await kullanımı (axios kullanarak)
+import axios from "axios";
 (async ()=>{
-    const users = await (
-        await fetch("https://jsonplaceholder.typicode.com/users")
-    ).json()
+    const {data:users} =  await axios("https://jsonplaceholder.typicode.com/users");
 
-    const post1 = await (
-        await fetch("https://jsonplaceholder.typicode.com/posts/1")
-    ).json()
+    const {data:post1} = await axios("https://jsonplaceholder.typicode.com/posts/1");
 
-    const post2 = await (
-        await fetch("https://jsonplaceholder.typicode.com/posts/2")
-    ).json()
+    const {data:post2} = await axios("https://jsonplaceholder.typicode.com/posts/2");
 
     console.log("User", users);
     console.log("Post 1", post1);
