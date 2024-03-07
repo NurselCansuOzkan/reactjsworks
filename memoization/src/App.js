@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 
 import "./App.css";
 import Header from "./components/Header";
@@ -13,17 +13,22 @@ function App() {
 
   //useMemo kullanılarak Header componenti içerisinde re-render edilmesi engellendi
   //eğer dependency array içerisindeki veri değişirse render olur
-  const data = useMemo(() => {
-    return calculateObject(number);
-  }, [number]);
+  // const data = useMemo(() => {
+  //   return calculateObject(number);
+  // }, [number]);
 
   // const data = calculateObject();
+
+  //useCallback ile fonksiyonun aynı fonksiyon olduğu belirtiliyor, dependency array içerisindeki veri değişene kadar
+  const increment = useCallback(() => {
+    setNumber((prevState) => prevState + 1);
+  }, []);
+
   return (
     <div className="App">
-      <Header data={data} />
+      <Header increment={increment} />
       <hr />
       <h1>{number}</h1>
-      <button onClick={() => setNumber(number + 1)}>Click</button>
 
       <br />
       <br />
@@ -32,10 +37,10 @@ function App() {
   );
 }
 
-function calculateObject(number) {
-  console.log("Calculating...");
-  for (let index = 0; index < 100000000; index++) {}
-  return { name: "Nursel" , number};
-}
+// function calculateObject(number) {
+//   console.log("Calculating...");
+//   for (let index = 0; index < 100000000; index++) {}
+//   return { name: "Nursel" , number};
+// }
 
 export default App;
