@@ -1,32 +1,33 @@
-import { Formik } from "formik";
+import { useFormik} from "formik";
 import "./App.css";
 
 function App() {
+  const formik = useFormik({
+    initialValues: {
+      firstName: 'Nursel',
+      lastName: 'Özkan',
+      email: 'nurselcansuozkan@gmail.com',
+      gender: "female",
+          hobies: [],
+          country: "turkey",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(formik.values, null, 2));
+      console.log(formik.values);
+
+    },
+  });
   return (
     <div className="App">
       <h1>Sign Up</h1>
-      <Formik
-        initialValues={{
-          firstName: "Nursel",
-          lastName: "Özkan",
-          email: "nurselcansuozkan@gmail.com",
-          gender: "female",
-          hobies: [],
-          country: "turkey",
-        }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
-      >
-        {({ handleSubmit, handleChange, values }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <label htmlFor="firstName">First Name</label>
             <input
               id="firstName"
               name="firstName"
-              onChange={handleChange}
+              onChange={formik.handleChange}
               placeholder="Jane"
-              value={values.firstName}
+              value={formik.values.firstName}
             />
             <br />
             <br />
@@ -34,9 +35,9 @@ function App() {
             <input
               id="lastName"
               name="lastName"
-              onChange={handleChange}
+              onChange={formik.handleChange}
               placeholder="Doe"
-              value={values.lastName}
+              value={formik.values.lastName}
             />
             <br />
             <br />
@@ -46,8 +47,8 @@ function App() {
               name="email"
               placeholder="jane@acme.com"
               type="email"
-              onChange={handleChange}
-              value={values.email}
+              onChange={formik.handleChange}
+              value={formik.values.email}
             />
             <br />
             <br />
@@ -58,8 +59,8 @@ function App() {
               name="gender"
               value="male"
               type="radio"
-              onChange={handleChange}
-              checked={values.gender === "male"}
+              onChange={formik.handleChange}
+              checked={formik.values.gender === "male"}
             />
             <span>Female</span>
             <input
@@ -67,8 +68,8 @@ function App() {
               name="gender"
               value="female"
               type="radio"
-              onChange={handleChange}
-              checked={values.gender === "female"}
+              onChange={formik.handleChange}
+              checked={formik.values.gender === "female"}
             />
             <br />
             <br />
@@ -77,7 +78,7 @@ function App() {
                 type="checkbox"
                 name="hobies"
                 value="Reading"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
               Reading
             </div>
@@ -86,7 +87,7 @@ function App() {
                 type="checkbox"
                 name="hobies"
                 value="Cinema"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
               Cinema
             </div>
@@ -95,7 +96,7 @@ function App() {
                 type="checkbox"
                 name="hobies"
                 value="Photografy"
-                onChange={handleChange}
+                onChange={formik.handleChange}
               />
               Photografy
             </div>
@@ -103,7 +104,7 @@ function App() {
             <br />
             <br />
 
-            <select name="country" onChange={handleChange} value={values.country}>
+            <select name="country" onChange={formik.handleChange} value={formik.values.country}>
               <option value="turkey">Turkey</option>
               <option value="england">England</option>
               <option value="usa">USA</option>
@@ -114,10 +115,10 @@ function App() {
             <button type="submit">Submit</button>
             <br />
             <br />
-            <code>{JSON.stringify(values)}</code>
+            <code>{JSON.stringify(formik.values)}</code>
           </form>
-        )}
-      </Formik>
+      
+    
     </div>
   );
 }
