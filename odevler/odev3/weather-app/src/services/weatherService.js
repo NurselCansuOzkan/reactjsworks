@@ -58,6 +58,8 @@ const formatForecastWeather = (data) => {
       title: formatToLocalTime(d.dt, timezone, "ccc"),
       time: d.dt_txt,
       temp: d.main.temp,
+      temp_min: d.main.temp_min,
+      temp_max: d.main.temp_max,
       icon: d.weather[0].icon,
       desc: d.weather[0].main,
     };

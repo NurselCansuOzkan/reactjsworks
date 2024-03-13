@@ -16,7 +16,7 @@ function Forecast({ items }) {
                   <img src={iconUrlFromCode(item.icon)} alt="" />
                 </div>
                 <div className="forecast-description">{item.desc}</div>
-                <div className="forecast-temp">{item.temp} °C</div>
+                <div className="forecast-temp">{item.temp_min}° {item.temp_max}°</div>
               </div>
             </div>
           
